@@ -66,19 +66,21 @@ Edit the `.env` file:
 
 ```bash
 # Main project settings
-PROJECT_NAME=docker-starter
+PROJECT_NAME=starter
+
+# Gateway settings
+GATEWAY_API_HOST=starter-api
+GATEWAY_API_PORT=3000
+GATEWAY_API_SERVER_NAME=api.host.lc
+GATEWAY_FRONT_HOST=starter-front
+GATEWAY_FRONT_PORT=3000
+GATEWAY_FRONT_SERVER_NAME=host.lc
 
 # API settings
 API_PORT=3000
-GATEWAY_API_HOST=docker-starter-api
-GATEWAY_API_PORT=3000
-GATEWAY_API_SERVER_NAME=api.host.lc
 
 # Frontend settings
-FRONT_PORT=8080
-GATEWAY_FRONT_HOST=docker-starter-front
-GATEWAY_FRONT_PORT=8080
-GATEWAY_FRONT_SERVER_NAME=host.lc
+FRONT_PORT=3000
 FRONT_API_HOST=api.host.lc
 ```
 
