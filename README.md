@@ -22,12 +22,12 @@ The project consists of three main components:
 
 #### API Service
 
-- **Technology**: Node.js
+- **Technology**: Single Node.js demo server
 - **Port**: ${API_PORT}
 
 #### Frontend Service
 
-- **Technology**: Vanilla JavaScript + HTML
+- **Technology**: Vanilla JavaScript + HTML + Nginx (demo app)
 - **Port**: ${FRONT_PORT}
   - Static frontend with Nginx
   - Integration with API service
@@ -38,35 +38,11 @@ The project consists of three main components:
 - **Technology**: Nginx
 - **Ports**: 80 (HTTP), 443 (HTTPS)
 - **Features**:
-  - ✅ HTTP/2 support
-  - ✅ Reverse proxy for API and Frontend
-  - ✅ SSL/TLS termination
-  - ✅ HTTP → HTTPS redirect
-  - ✅ Security (HSTS, XSS Protection)
-
-## 📁 Project Structure
-
-```
-docker-starter/
-├── api/                          # API service
-│   ├── .docker/
-│   │   ├── Dockerfile           # Docker configuration for API
-│   │   └── entrypoint.sh        # Startup script
-├── front/                        # Frontend service
-│   ├── .docker/
-│   │   ├── Dockerfile           # Multi-stage Docker build
-│   │   ├── nginx.conf           # Nginx configuration
-│   │   └── entrypoint.sh        # Startup script
-├── gateway/                      # Gateway service
-│   ├── .docker/
-│   │   ├── Dockerfile           # Nginx Docker configuration
-│   │   ├── nginx.conf           # Main Nginx configuration
-│   │   └── entrypoint.sh        # Configuration and startup script
-│   ├── ssl/                     # SSL certificates
-│   └── logs/                    # Nginx logs
-├── .env                         # Environment variables
-├── .env.example                 # Environment variables example
-```
+  - HTTP/2 support
+  - Reverse proxy for API and Frontend
+  - SSL/TLS termination
+  - HTTP → HTTPS redirect
+  - Security (HSTS, XSS Protection)
 
 ## 🚀 Quick Start
 
@@ -188,6 +164,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have questions or issues: [Issue](https://github.com/scott-walker/docker-starter/issues)
 
----
+<br/>
 
 **Created with ❤️ for quick Docker project startup**
