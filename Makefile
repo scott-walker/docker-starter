@@ -1,6 +1,14 @@
 .SILENT:
 include .env
 
+# Docker compose up
+up: 
+	docker compose up -d --build
+
+# Docker compose down
+down: 
+	docker compose down --remove-orphans
+
 # Generate SSL certificate
 generate-ssl:
 	mkdir -p gateway/ssl
