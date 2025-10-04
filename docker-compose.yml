@@ -1,0 +1,62 @@
+services:
+  # API
+  api:
+    container_name: ${PROJECT_NAME}-api
+    build:
+      context: ./api
+      dockerfile: ./.docker/Dockerfile
+    environment:
+      - API_PORT=${API_PORT}
+    volumes:
+      - ./api:/app
+    networks:
+      - default
+
+  # FRONT
+  front:
+    container_name: ${PROJECT_NAME}-front
+    build:
+      context: ./front
+      dockerfile: ./.docker/Dockerfile
+      args:
+        - FRONT_PORT=${FRONT_PORT}
+        - FRONT_API_HOST=${FRONT_API_HOST}
+    environment:
+      - FRONT_PORT=${FRONT_PORT}
+      - FRONT_API_HOST=${FRONT_API_HOST}
+    volumes:
+      - ./front:/app
+    networks:
+      - default
+
+  # GATEWAY
+  gateway:
+    container_name: ${PROJECT_NAME}-gateway
+    build:
+      context: ./gateway
+      dockerfile: ./.docker/Dockerfile
+    depends_on:
+      - api
+      - front
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - GATEWAY_API_HOST=${GATEWAY_API_HOST}
+      - GATEWAY_API_PORT=${GATEWAY_API_PORT}
+      - GATEWAY_API_SERVER_NAME=${GATEWAY_API_SERVER_NAME}
+      - GATEWAY_FRONT_HOST=${GATEWAY_FRONT_HOST}
+      - GATEWAY_FRONT_PORT=${GATEWAY_FRONT_PORT}
+      - GATEWAY_FRONT_SERVER_NAME=${GATEWAY_FRONT_SERVER_NAME}
+    volumes:
+      - ./gateway/.docker/nginx.conf:/etc/nginx/nginx.conf.template
+      - ./gateway/.docker/entrypoint.sh:/entrypoint.sh
+      - ./gateway/ssl:/etc/nginx/ssl
+      - ./gateway/logs:/var/log/nginx
+    networks:
+      - default
+
+networks:
+  default:
+    name: ${PROJECT_NAME}-network
+    driver: bridge
